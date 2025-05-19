@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us | Home Appliance Partner</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #05386b;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    /* Navbar */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+    .logo img {
+      height: 50px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      font-weight: 600;
+      color: #000;
+      position: relative;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: #0bb7ff;
+      left: 0;
+      bottom: 0;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #0bb7ff;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px 40px;
+    }
+
+    /* Header Section */
+    .header-section {
+      background-color: #c4e4f5;
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+    .header-section h1 {
+      font-weight: 700;
+      font-size: 1.9rem;
+      margin: 0 0 10px;
+    }
+    .header-section p {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0 0 30px;
+    }
+
+    /* Phone button */
+    .phone-button {
+      display: inline-flex;
+      align-items: center;
+      background: #0bb7ff;
+      padding: 12px 25px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #05386b;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgb(11 183 255 / 0.4);
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+    .phone-button:hover {
+      background: #09a0e0;
+      color: #022a48;
+    }
+    .phone-button svg {
+      width: 28px;
+      height: 28px;
+      fill: #05386b;
+    }
+
+    /* Locations Section */
+    .locations {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 60px 0 80px;
+      flex-wrap: wrap;
+    }
+    .location {
+      max-width: 360px;
+      flex: 1 1 320px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .location iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgb(5 56 107 / 0.15);
+    }
+    .location h3 {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .location p {
+      margin: 5px 0;
+      font-weight: 600;
+      color: #05386b;
+    }
+    .location .email {
+      font-weight: 600;
+      color: #05386b;
+      margin-bottom: 12px;
+    }
+    .whatsapp-button {
+      background: #f0f2f5;
+      font-weight: 700;
+      color: #05386b;
+      padding: 6px 12px;
+      border-radius: 4px;
+      box-shadow: inset 0 0 4px #c4c4c4;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+    .whatsapp-button:hover {
+      background: #d0e9f9;
+    }
+
+    /* Contact Form Section */
+    .contact-form-section {
+      background: #f3f3f3;
+      padding: 40px 20px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .contact-form-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #05386b;
+      margin: 0;
+    }
+
+    /* Why Choose Section */
+    .why-choose {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      color: #05386b;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .locations {
+        flex-direction: column;
+        gap: 40px;
+      }
+      .location {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <img src="images/raha.png" alt="Raha Cool Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <section class="header-section">
+    <div class="container">
+      <h1>Connect with Us | Your Trusted Home Appliance Partner</h1>
+      <p>Contact us for expert home appliance solutions, reliable service, and professional support. Reach out today—we’d love to hear from you!</p>
+      <a class="phone-button" href="tel:+96766797555" aria-label="Call 6679 7555">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6.62 10.79a15.091 15.091 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.74 3.88.74a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.26 2.67.74 3.88a1 1 0 01-.21 1.11l-2.41 2.41z"/>
+        </svg>
+        6679 7555
+      </a>
+    </div>
+  </section>
+
+  <section class="container locations" aria-label="Our locations">
+    <div class="location" role="region" aria-labelledby="loc1-title">
+      <iframe src="https://maps.google.com/maps?q=Salwa%20Road,%20Before%20Ansar%20City&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        title="Map showing Salwa Road, Before Ansar City location" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <h3 id="loc1-title">VISIT US AT</h3>
+      <p><strong>Salwa Road, Before Ansar City</strong></p>
+      <p>Contact: <a href="tel:+96766797555">6679 7555</a></p>
+      <p class="email">Email: <a href="mailto:sales1@rahacool.com">sales1@rahacool.com</a></p>
+      <a href="https://wa.me/96766797555" target="_blank" rel="noopener noreferrer" class="whatsapp-button"
+        aria-label="Chat on WhatsApp Salwa Road location">WHATSAPP</a>
+    </div>
+
+    <div class="location" role="region" aria-labelledby="loc2-title">
+      <iframe src="https://maps.google.com/maps?q=Al%20Rayyan,%20Al%20Wajba%20Street&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        title="Map showing Al Rayyan, Al Wajba Street location" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <h3 id="loc2-title">VISIT US AT</h3>
+      <p><strong>Al Rayyan, Al Wajba Street</strong></p>
+      <p>Contact: <a href="tel:+96730810009">3081 0009</a></p>
+      <p class="email">Email: <a href="mailto:sales2@rahacool.com">sales2@rahacool.com</a></p>
+      <a href="https://wa.me/96730810009" target="_blank" rel="noopener noreferrer" class="whatsapp-button"
+        aria-label="Chat on WhatsApp Al Rayyan location">WHATSAPP</a>
+    </div>
+  </section>
+
+  <section class="contact-form-section" aria-label="Contact form">
+    <h2>CONTACT FORM</h2>
+    <!-- Contact form placeholder - you can replace below with actual form elements -->
+  </section>
+
+  <section class="container">
+    <h2 class="why-choose">Why Choose Our Service?</h2>
+    <!-- Add your content here -->
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Raha Cool</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #5a7d8a;
+            --primary: #00a8e8;
+            --primary-light: rgba(0, 168, 232, 0.1);
+            --dark-color: #343a40;
+            --secondary: #0077b6;
+            --secondary: #0077b6;
+            --dark: #1e3c4d;
+            --light: #f8f9fa;
+            --text: #333;
+            --text-light: #f0f0f0;
+            --dark-blue: #1e3c4d;
+            --medium-blue: #3a5068;
+            --light-blue: #5a7d8a;
+            --text-color: #f0f0f0;
+            --highlight-color: #66ffe0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue), var(--light-blue));
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .wind-line {
+            position: absolute;
+            width: 160px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 3px;
+            animation: blowWind 4.5s linear infinite;
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+            opacity: 0.7;
+        }
+
+        .wind-line:nth-child(1) {
+            top: 25%;
+            left: -250px;
+            animation-delay: 0s;
+        }
+
+        .wind-line:nth-child(2) {
+            top: 45%;
+            left: -250px;
+            animation-delay: 1.7s;
+        }
+
+        .wind-line:nth-child(3) {
+            top: 65%;
+            left: -250px;
+            animation-delay: 3.4s;
+        }
+
+        @keyframes blowWind {
+            0% {
+                transform: translateX(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(130vw);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Temperature Display */
+        .digital-temp {
+            position: fixed;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            font-family: 'Orbitron', monospace;
+            font-size: 12rem;
+            color: var(--primary-color);
+            text-shadow:
+                0 0 20px var(--primary-color),
+                0 0 40px var(--primary-color),
+                0 0 80px var(--primary-color),
+                0 0 120px var(--primary-color);
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+            animation:
+                pulseGlow 2s ease-in-out infinite,
+                floatTemp 6s ease-in-out infinite;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                text-shadow:
+                    0 0 20px var(--primary-color),
+                    0 0 40px var(--primary-color),
+                    0 0 80px var(--primary-color),
+                    0 0 120px var(--primary-color);
+            }
+
+            50% {
+                opacity: 1;
+                text-shadow:
+                    0 0 30px var(--primary-color),
+                    0 0 60px var(--primary-color),
+                    0 0 100px var(--primary-color),
+                    0 0 150px var(--primary-color);
+            }
+        }
+
+        @keyframes floatTemp {
+
+            0%,
+            100% {
+                transform: translateY(-50%) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-50%) translateX(10px);
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .content-wrapper {
+            background: rgba(30, 60, 77, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            animation: slideDown 1.5s ease;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--highlight-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        p:nth-of-type(1) {
+            animation-delay: 0.5s;
+        }
+
+        p:nth-of-type(2) {
+            animation-delay: 1s;
+        }
+
+        p:nth-of-type(3) {
+            animation-delay: 1.5s;
+        }
+
+        .highlight {
+            color: var(--highlight-color);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .digital-temp {
+                font-size: 10rem;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .digital-temp {
+                font-size: 8rem;
+            }
+
+            .content-wrapper {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px;
+                position: relative;
+                width: 100%;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-content {
+                padding-top: 30px;
+            }
+
+            .digital-temp {
+                font-size: 6rem;
+                opacity: 0.6;
+            }
+
+            .content-wrapper {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .digital-temp {
+                font-size: 4.5rem;
+                right: 50%;
+                transform: translateX(50%) translateY(-50%);
+                top: 20%;
+                opacity: 0.5;
+            }
+
+            .content-wrapper {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/raha.png" alt="Raha Cool Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li>
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="wind-line"></div>
+        <div class="wind-line"></div>
+        <div class="wind-line"></div>
+        <div class="digital-temp">18°C</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <h1>About <span class="highlight">Raha Cool</span></h1>
+                <p><span class="highlight">Raha Cool</span> is a trusted multi-branded home appliance showroom in Qatar.
+                    We proudly offer premium HVAC products, top-tier air conditioners, and exceptional AC services
+                    across the region. Our commitment to quality and customer satisfaction has made us a leader in the
+                    cooling solutions industry.</p>
+                <p>Our showroom features a wide range of cutting-edge air conditioning systems from the most reliable
+                    brands. We focus on <span class="highlight">performance</span>, <span class="highlight">energy
+                        efficiency</span>, and <span class="highlight">long-lasting comfort</span> to serve homes and
+                    businesses alike. Each product in our collection is carefully selected to meet the highest standards
+                    of durability and innovation.</p>
+                <p>From expert <span class="highlight">installation</span> to regular <span
+                        class="highlight">maintenance</span> and <span class="highlight">repairs</span>, our skilled
+                    technicians ensure your cooling systems run smoothly year-round. Visit us to experience quality and
+                    service that's second to none, where your comfort is our top priority.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Intersection Observer for paragraph animations
+            const paragraphs = document.querySelectorAll('p');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            paragraphs.forEach(p => {
+                observer.observe(p);
+            });
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Temperature animation enhancement
+            const tempDisplay = document.querySelector('.digital-temp');
+            if (tempDisplay) {
+                let scale = 1;
+                const scaleUp = () => {
+                    scale += 0.002;
+                    tempDisplay.style.transform = `translateY(-50%) scale(${scale})`;
+                    if (scale < 1.05) {
+                        requestAnimationFrame(scaleUp);
+                    } else {
+                        scaleDown();
+                    }
+                };
+                const scaleDown = () => {
+                    scale -= 0.002;
+                    tempDisplay.style.transform = `translateY(-50%) scale(${scale})`;
+                    if (scale > 1) {
+                        requestAnimationFrame(scaleDown);
+                    } else {
+                        setTimeout(() => {
+                            requestAnimationFrame(scaleUp);
+                        }, 2000);
+                    }
+                };
+                scaleUp();
+            }
+        });
+    </script>
+</body>
+
+</html>

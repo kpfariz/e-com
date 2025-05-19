@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Raha Cool Appliances</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00a8e8;
+            --primary-light: rgba(0, 168, 232, 0.1);
+            --secondary: #0077b6;
+            --dark: #1e3c4d;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+            --text: #333;
+            --text-light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Shop Hero */
+        .shop-hero {
+            background: linear-gradient(140deg, #033450 0%, rgb(3 54 82) 100%);
+            padding: 150px 5% 80px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-hero h1 {
+            font-size: 3.5rem;
+            color: var(--light);
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .shop-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--light);
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .category-tab {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .category-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 168, 232, 0.3);
+        }
+
+        /* Products Grid */
+        .products-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .product-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .product-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .product-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .product-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .product-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 168, 232, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 80%;
+            max-height: 80%;
+            transition: transform 0.5s ease;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        /* Shine effect */
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    transparent 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .product-card:hover .product-image::after {
+            left: 150%;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-to-cart,
+        .view-details {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0, 168, 232, 0.3);
+        }
+
+        .view-details {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .view-details:hover {
+            background: var(--primary-light);
+        }
+
+        /* Floating appliance animations */
+        .floating-ac {
+            position: absolute;
+            top: 20%;
+            left: 5%;
+            font-size: 5rem;
+            color: rgba(0, 168, 232, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-fridge {
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            font-size: 7rem;
+            color: rgba(0, 168, 232, 0.1);
+            animation: float 7s ease-in-out infinite 1s;
+        }
+
+        .floating-washer {
+            position: absolute;
+            top: 60%;
+            left: 10%;
+            font-size: 4rem;
+            color: rgba(0, 168, 232, 0.1);
+            animation: float 5s ease-in-out infinite 2s;
+        }
+
+        .floating-ac {
+            color: #329bc8;
+            /* Light blue (AC/cool tone) */
+        }
+
+        .floating-fridge {
+            color: #329bc8;
+            /* Pink (Fridge/fun tone) */
+        }
+
+        .floating-washer {
+            color: #329bc8;
+            /* Dodger blue (Water/washer tone) */
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .shop-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .floating-ac,
+            .floating-fridge,
+            .floating-washer {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .shop-hero {
+                padding: 120px 5% 50px;
+                margin-top: 100px;
+            }
+
+            .shop-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .category-tabs {
+                gap: 10px;
+            }
+
+            .category-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .shop-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/raha.png" alt="Raha Cool Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">3</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Shop Hero Section -->
+    <section class="shop-hero">
+        <i class="fas fa-snowflake floating-ac"></i>
+        <i class="fas fa-ice-cream floating-fridge"></i>
+        <i class="fas fa-tint floating-washer"></i>
+
+        <h1>Premium Home Appliances</h1>
+        <p>Discover our collection of high-efficiency appliances from top brands at competitive prices</p>
+
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="all">All Products</div>
+            <div class="category-tab" data-category="ac">Air Conditioners</div>
+            <div class="category-tab" data-category="fridge">Refrigerators</div>
+            <div class="category-tab" data-category="washer">Washing Machines</div>
+            <div class="category-tab" data-category="cooking">Cooking Range</div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <div class="products-container">
+        <div class="products-grid">
+            <!-- AC Product 1 -->
+            <div class="product-card" data-category="ac">
+                <span class="product-badge">Best Seller</span>
+                <div class="product-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY94OHqIpIpFwOyfKTpETiO30CdH8dLt9HkQ&s"
+                        alt="Inverter AC">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Air Conditioners</span>
+                    <h3 class="product-title">UltraCool Inverter AC 1.5 Ton</h3>
+                    <div class="product-price">
+                        <span class="current-price">QR 2,499</span>
+                        <span class="original-price">QR 2,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="view-details"><i class="fas fa-info-circle"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AC Product 2 -->
+            <div class="product-card" data-category="ac">
+                <span class="product-badge">Energy Saver</span>
+                <div class="product-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZm64pR5CBo5mQ6IQdfvJ7c125_hWQzE_lA&s"
+                        alt="Split AC">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Air Conditioners</span>
+                    <h3 class="product-title">ArcticFlow Split AC 2 Ton</h3>
+                    <div class="product-price">
+                        <span class="current-price">QR 3,299</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="view-details"><i class="fas fa-info-circle"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fridge Product 1 -->
+            <!-- Example Fridge Product -->
+            <div class="product-card" data-category="fridge">
+                <span class="product-badge">New</span>
+                <div class="product-image">
+                    <img src="data:image/jpeg;base64,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"
+                        alt="Fridge">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Refrigerators</span>
+                    <h3 class="product-title">FrostGuard 500L Fridge</h3>
+                    <div class="product-price">
+                        <span class="current-price">QR 1,999</span>
+                        <span class="original-price">QR 2,299</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="view-details"><i class="fas fa-info-circle"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fridge Product 2 -->
+            <div class="product-card" data-category="fridge">
+                <span class="product-badge">Smart</span>
+                <div class="product-image">
+                    <img src="data:image/jpeg;base64,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"
+                        alt="Smart Fridge">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Refrigerators</span>
+                    <h3 class="product-title">iChill Smart Refrigerator</h3>
+                    <div class="product-price">
+                        <span class="current-price">QR 7,899</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="view-details"><i class="fas fa-info-circle"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Washer Product 1 -->
+            <div class="product-card" data-category="washer">
+                <span class="product-badge">New</span>
+                <div class="product-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMG844bMVGNHPcjwWFVWcQO4tj5ZsuPryDhQ&s"
+                        alt="Front Load Washer">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Washing Machines</span>
+                    <h3 class="product-title">EcoSmart Front Load Washer 9kg</h3>
+                    <div class="product-price">
+                        <span class="current-price">QR 3,199</span>
+                        <span class="original-price">QR 3,599</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="view-details"><i class="fas fa-info-circle"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cooking Product 1 -->
+            <div class="product-card" data-category="cooking">
+                <div class="product-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfDzgNn5mqm8Vz_k7nl4v3AJnB7UjMNSahhQ&s"
+                        alt="Induction Range">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Cooking Range</span>
+                    <h3 class="product-title">ChefMaster Induction Cooktop</h3>
+                    <div class="product-price">
+                        <span class="current-price">QR 1,899</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="view-details"><i class="fas fa-info-circle"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Category filtering
+            const tabs = document.querySelectorAll('.category-tab');
+            const products = document.querySelectorAll('.product-card');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const category = this.dataset.category;
+
+                    // Filter products
+                    products.forEach(product => {
+                        if (category === 'all' || product.dataset.category === category) {
+                            product.style.display = 'block';
+                            // Add animation
+                            product.style.animation = 'fadeInUp 0.5s forwards';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add to cart animation
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Animation
+                    this.innerHTML = '<i class="fas fa-check"></i> Added!';
+                    this.style.backgroundColor = '#4CAF50';
+
+                    // Create flying cart icon
+                    const flyingCart = document.createElement('div');
+                    flyingCart.innerHTML = '<i class="fas fa-shopping-cart"></i>';
+                    flyingCart.style.position = 'fixed';
+                    flyingCart.style.fontSize = '20px';
+                    flyingCart.style.color = 'var(--primary)';
+                    flyingCart.style.zIndex = '1000';
+
+                    const rect = this.getBoundingClientRect();
+                    flyingCart.style.left = `${rect.left + rect.width / 2}px`;
+                    flyingCart.style.top = `${rect.top}px`;
+                    document.body.appendChild(flyingCart);
+
+                    // Animate to cart
+                    const cartIcon = document.querySelector('.cart-icon');
+                    const cartRect = cartIcon.getBoundingClientRect();
+
+                    const animation = flyingCart.animate([
+                        {
+                            left: `${rect.left + rect.width / 2}px`,
+                            top: `${rect.top}px`,
+                            opacity: 1,
+                            transform: 'scale(1)'
+                        },
+                        {
+                            left: `${cartRect.left + cartRect.width / 2}px`,
+                            top: `${cartRect.top}px`,
+                            opacity: 0,
+                            transform: 'scale(0.5)'
+                        }
+                    ], {
+                        duration: 800,
+                        easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                    });
+
+                    animation.onfinish = () => {
+                        flyingCart.remove();
+                        // Update cart count
+                        const cartCount = document.querySelector('.cart-count');
+                        cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                    };
+
+                    // Reset button after animation
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+                        this.style.backgroundColor = '';
+                    }, 2000);
+                });
+            });
+
+            // 3D tilt effect on product cards
+            products.forEach(product => {
+                product.addEventListener('mousemove', (e) => {
+                    const rect = product.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+
+                    product.style.transform = `translateY(-10px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                });
+
+                product.addEventListener('mouseleave', () => {
+                    product.style.transform = 'translateY(-10px) rotateX(0) rotateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
