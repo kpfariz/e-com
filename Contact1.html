@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Cool Appliance Services</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #00a8e8;
+            --secondary-color: #0077b6;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --cool-blue: rgba(0, 168, 255, 0.4);
+            --primary: #00a8e8;
+            --primary-light: rgba(0, 168, 232, 0.1);
+            --secondary: #0077b6;
+            --dark: #1e3c4d;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+            --text: #333;
+            --text-light: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+
+        .contact-hero {
+            background: rgb(10 37 64 / var(--tw-bg-opacity, 1));
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero h1 {
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Fan Cooler Animation */
+        .fan-container {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .fan {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 20px var(--cool-blue);
+            overflow: hidden;
+        }
+
+        .fan-center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            border: 3px solid white;
+        }
+
+        .fan-blade {
+            position: absolute;
+            width: 40%;
+            height: 20%;
+            background: white;
+            top: 40%;
+            left: 50%;
+            transform-origin: left center;
+            border-radius: 10px;
+            box-shadow: 0 0 5px var(--cool-blue);
+        }
+
+        .fan-blade:nth-child(1) {
+            transform: rotate(0deg);
+        }
+
+        .fan-blade:nth-child(2) {
+            transform: rotate(90deg);
+        }
+
+        .fan-blade:nth-child(3) {
+            transform: rotate(180deg);
+        }
+
+        .fan-blade:nth-child(4) {
+            transform: rotate(270deg);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fan-blades {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 2s linear infinite;
+        }
+
+        .cooling-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--cool-blue) 0%, rgba(255, 255, 255, 0) 70%);
+            opacity: 0.5;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .contact-card:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right,
+                    transparent 45%,
+                    var(--cool-blue) 50%,
+                    transparent 55%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .contact-card:hover:before {
+            opacity: 0.3;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Rest of your existing styles... */
+        .form-control {
+            height: 50px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #03254c;
+            ;
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .fan-container {
+                display: none;
+            }
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/raha.png" alt="Raha Cool Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li>
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <!-- Fan Cooler Animation -->
+        <div class="fan-container animate__animated animate__fadeInLeft">
+            <div class="fan">
+                <div class="cooling-effect"></div>
+                <div class="fan-blades">
+                    <div class="fan-blade"></div>
+                    <div class="fan-blade"></div>
+                    <div class="fan-blade"></div>
+                    <div class="fan-blade"></div>
+                </div>
+                <div class="fan-center"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="animate__animated animate__fadeInDown">Need AC Service or Repair?</h1>
+                    <p class="animate__animated animate__fadeIn animate__delay-1s">Stay cool with our expert appliance
+                        services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-card">
+                        <h2 class="section-title">Contact Our Cooling Experts</h2>
+                        <p>Fill out the form below and we'll get back to you quickly</p>
+
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Email Address"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="tel" class="form-control" id="phone" placeholder="Phone Number"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="service">
+                                            <option value="">Select Service Needed</option>
+                                            <option value="ac">AC Installation/Repair</option>
+                                            <option value="refrigerator">Refrigerator Repair</option>
+                                            <option value="washing-machine">Washing Machine Repair</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" placeholder="Describe your cooling issue..."
+                                    required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-snowflake me-2"></i> Get Cool Solution
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script>
+
+        document.addEventListener('mousemove', function (e) {
+            const fanBlades = document.querySelector('.fan-blades');
+            if (!fanBlades) return;
+
+            const x = e.clientX / window.innerWidth;
+            const speed = 1 + x * 3; //
+
+            fanBlades.style.animationDuration = `${speed}s`;
+        });
+
+        // Form submission animation
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Request Sent!';
+            submitBtn.classList.remove('btn-primary');
+            submitBtn.classList.add('btn-success');
+
+            // Create cooling effect animation
+            const coolingEffect = document.createElement('div');
+            coolingEffect.style.position = 'fixed';
+            coolingEffect.style.width = '100vw';
+            coolingEffect.style.height = '100vh';
+            coolingEffect.style.background = 'radial-gradient(circle, var(--cool-blue) 0%, rgba(255,255,255,0) 70%)';
+            coolingEffect.style.top = '0';
+            coolingEffect.style.left = '0';
+            coolingEffect.style.opacity = '0';
+            coolingEffect.style.zIndex = '1000';
+            coolingEffect.style.pointerEvents = 'none';
+            document.body.appendChild(coolingEffect);
+
+
+            gsap.to(coolingEffect, {
+                opacity: 0.6,
+                duration: 0.5,
+                yoyo: true,
+                repeat: 1,
+                onComplete: () => {
+                    coolingEffect.remove();
+                    setTimeout(() => {
+                        submitBtn.innerHTML = '<i class="fas fa-snowflake me-2"></i> Get Cool Solution';
+                        submitBtn.classList.remove('btn-success');
+                        submitBtn.classList.add('btn-primary');
+                        this.reset();
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
