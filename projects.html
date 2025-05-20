@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our HVAC Projects</title>
+    <style>
+         :root {
+            --primary: #00a8e8;
+            --primary-light: rgba(0, 168, 232, 0.1);
+            --secondary: #0077b6;
+            --dark: #1e3c4d;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+            --text: #333;
+            --text-light: #f0f0f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+         .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+              width: 100%;
+        }
+
+        .projects-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://img.freepik.com/premium-photo/two-men-working-air-conditioner-ceiling-modern-office_1283887-17675.jpg?semt=ais_hybrid&w=740');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .projects-header h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: #061b3a;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #1d276e;
+            transform: translateY(-2px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .project-info p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .project-client {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .client-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .client-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .client-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .client-info p {
+            font-size: 0.8rem;
+            color: #95a5a6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .projects-header h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+      <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/raha.png" alt="Raha Cool Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <header class="projects-header">
+        <h1>Our HVAC Projects</h1>
+    </header>
+
+    <div class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="commercial">Commercial</button>
+            <button class="filter-btn" data-filter="residential">Residential</button>
+            <button class="filter-btn" data-filter="industrial">Industrial</button>
+            <button class="filter-btn" data-filter="maintenance">Maintenance</button>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="commercial">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Office Building HVAC Installation">
+                </div>
+                <div class="project-info">
+                    <h3>Office Complex HVAC Installation</h3>
+                    <p>Complete HVAC system installation for a 20-story office building in downtown, featuring energy-efficient units with smart climate control technology.</p>
+                    <div class="project-client">
+                        <div class="client-logo">
+                            <img src="https://logo.clearbit.com/acme.com" alt="ACME Corp Logo">
+                        </div>
+                        <div class="client-info">
+                            <h4>ACME Corporation</h4>
+                            <p>Commercial Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-category="residential">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Luxury Home HVAC System">
+                </div>
+                <div class="project-info">
+                    <h3>Luxury Home Climate Control</h3>
+                    <p>Custom-designed HVAC solution for a 10,000 sq ft luxury residence with zoned temperature control and air purification systems.</p>
+                    <div class="project-client">
+                        <div class="client-logo">
+                            <img src="https://logo.clearbit.com/villaliving.com" alt="Villa Living Logo">
+                        </div>
+                        <div class="client-info">
+                            <h4>Villa Living</h4>
+                            <p>Residential Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-category="industrial">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Factory Ventilation System">
+                </div>
+                <div class="project-info">
+                    <h3>Industrial Ventilation System</h3>
+                    <p>Specialized ventilation and cooling system for a manufacturing plant requiring precise temperature and humidity control.</p>
+                    <div class="project-client">
+                        <div class="client-logo">
+                            <img src="https://logo.clearbit.com/industech.com" alt="IndusTech Logo">
+                        </div>
+                        <div class="client-info">
+                            <h4>IndusTech Manufacturing</h4>
+                            <p>Industrial Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card" data-category="maintenance">
+                <div class="project-image">
+                    <img src="data:image/jpeg;base64,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" alt="HVAC Maintenance">
+                </div>
+                <div class="project-info">
+                    <h3>Annual Maintenance Contract</h3>
+                    <p>Ongoing maintenance and service for a chain of retail stores, ensuring optimal performance and energy efficiency of their HVAC systems.</p>
+                    <div class="project-client">
+                        <div class="client-logo">
+                            <img src="https://logo.clearbit.com/retailchain.com" alt="Retail Chain Logo">
+                        </div>
+                        <div class="client-info">
+                            <h4>Urban Retail Chain</h4>
+                            <p>Commercial Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card" data-category="residential">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Apartment Building HVAC">
+                </div>
+                <div class="project-info">
+                    <h3>Apartment Complex Upgrade</h3>
+                    <p>Complete overhaul of HVAC systems for a 150-unit apartment building, improving efficiency by 40% and resident comfort.</p>
+                    <div class="project-client">
+                        <div class="client-logo">
+                            <img src="https://logo.clearbit.com/homesteadliving.com" alt="Homestead Living Logo">
+                        </div>
+                        <div class="client-info">
+                            <h4>Homestead Living</h4>
+                            <p>Residential Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card" data-category="commercial">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hotel HVAC System">
+                </div>
+                <div class="project-info">
+                    <h3>Boutique Hotel Climate Control</h3>
+                    <p>Custom HVAC solution for a historic hotel renovation, preserving architectural integrity while modernizing climate systems.</p>
+                    <div class="project-client">
+                        <div class="client-logo">
+                            <img src="https://logo.clearbit.com/grandhotels.com" alt="Grand Hotels Logo">
+                        </div>
+                        <div class="client-info">
+                            <h4>Grand Hotels Group</h4>
+                            <p>Commercial Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            // Filter projects
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add animation when scrolling to projects
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Apply animation to project cards
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
