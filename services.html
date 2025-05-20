@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HVAC Services</title>
+    <style>
+         :root {
+            --primary: #00a8e8;
+            --primary-light: rgba(0, 168, 232, 0.1);
+            --secondary: #0077b6;
+            --dark: #1e3c4d;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+            --text: #333;
+            --text-light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+         header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+              width: 100%;
+        }
+
+
+        .services-hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background-color: #2c3e50; /* Fallback color */
+        }
+
+        .background-animation img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .background-animation img.active {
+            opacity: 1;
+        }
+
+        .services-content {
+            max-width: 800px;
+        }
+
+        .services-content h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .enquire-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #e67e22;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid #e67e22;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+
+        .enquire-btn:hover {
+            background-color: transparent;
+            color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .services-content h1 {
+                font-size: 2rem;
+            }
+            
+            .enquire-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+     <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/raha.png" alt="Raha Cool Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="background-animation">
+        <!-- Replace these with your actual images in the images folder -->
+        <img src="https://primecareappliance.in/wp-content/uploads/2024/11/AdobeStock_830398027-1024x683.jpeg" alt="HVAC System" class="active">
+        <img src="https://media.vyaparify.com/vcards/services/25947/home-appliances-repairing.jpg" alt="HVAC Technician">
+        <img src="https://webtk.sfastservices.com/blogimg/Ac%20Service%20Charges%20In%20Jaipur,%20Ac%20Gas%20Filling%20Charges%20In%20Jaipur,%20Ac%20Repair%20charges%20in%20Jaipur.jpg" alt="AC Unit">
+    </div>
+
+    <section class="services-hero">
+        <div class="services-content">
+            <h1>Comprehensive HVAC Installation, Maintenance, Repair, and Troubleshooting Services for Your Home and Business</h1>
+            <a href="#contact" class="enquire-btn">Enquire now</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.background-animation img');
+            
+            // First check if any images loaded successfully
+            let imagesLoaded = false;
+            
+            images.forEach(img => {
+                img.onload = function() {
+                    imagesLoaded = true;
+                };
+                img.onerror = function() {
+                    // If image fails to load, hide it
+                    this.style.display = 'none';
+                };
+            });
+            
+            // Only start slideshow if we have at least one image
+            if (images.length > 0) {
+                let currentImage = 0;
+                
+                function changeBackground() {
+                    images[currentImage].classList.remove('active');
+                    currentImage = (currentImage + 1) % images.length;
+                    images[currentImage].classList.add('active');
+                }
+                
+                // Initial check if we have any visible images
+                setTimeout(() => {
+                    const visibleImages = document.querySelectorAll('.background-animation img:not([style*="display: none"])');
+                    if (visibleImages.length > 1) {
+                        // Change image every 5 seconds only if we have multiple images
+                        setInterval(changeBackground, 5000);
+                    }
+                }, 1000);
+            }
+            
+            // Parallax effect
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const background = document.querySelector('.background-animation');
+                if (background) {
+                    background.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+                }
+            });
+            
+            // Smooth scroll for enquiry button
+            const enquiryBtn = document.querySelector('.enquire-btn');
+            if (enquiryBtn) {
+                enquiryBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
